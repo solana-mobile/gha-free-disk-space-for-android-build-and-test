@@ -1,0 +1,10 @@
+name: 'Uninstall some unused packages not needed by Android build and/or test workflows'
+description: 'Creating Android virtual devices for running instrumented tests takes a substantial amount of disk space. For a complex Android project, it is easy to run out of disk space. This action removes some packages from the Ubuntu runner image not used by Android build and/or test to free up disk space'
+runs:
+  using: composite
+  steps:
+    - run: |
+          sudo apt-get remove --purge apache2 dotnet-sdk-6.0 dotnet-sdk-7.0 dotnet-sdk-8.0 firefox heroku libmysqlclient-dev microsoft-edge-stable mysql-* nginx powershell r-base
+          sudo apt-get autoremove
+          sudo apt-get autoclean
+      shell: bash
